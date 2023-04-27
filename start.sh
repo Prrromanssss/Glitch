@@ -9,9 +9,13 @@ export PYTHONUNBUFFERED=true
 # Install Python 3 virtual env
 VIRTUALENV=./venv
 
+if [ ! -d $VIRTUALENV ]; then
+  python3 -m venv $VIRTUALENV
+fi
+
 # Install pip into virtual environment
-if [ ! -d $VIRTUALENV/bin/pip ]; then
-    curl --silent --show-error --retry 5 https://bootstrap.pypa.io/get-pip.py | $VIRTUALENV/bin/python
+if [ ! -f $VIRTUALENV/bin/pip ]; then
+  curl --silent --show-error --retry 5 https://bootstrap.pypa.io/get-pip.py | $VIRTUALENV/bin/python
 fi
 
 # Install the requirements
